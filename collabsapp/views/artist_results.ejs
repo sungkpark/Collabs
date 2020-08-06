@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+      <h1><%= searched_name %> </h1>
+      <ul>
+          <% for( let i = 0; i < artists.length; i++ ) { %>
+            <li>
+                <div>
+                    <%= artists[i] %> 
+                </div>
+            </li>
+          <% } %>
+      </ul>
+      <form action="/artist_results" method="POST">
+        <input name="back" type="submit" value="Back" />
+      </form>
+  </body>
+</html>

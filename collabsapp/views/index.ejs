@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Welcome to <%= title %></h2>
+    <h4><%= app_explanation %></h4>
+    <p><%= explanation %></p>
+    <form action="/" method="POST">
+      <input
+        type="text"
+        name="input_artists"
+        placeholder="Write in the artists"
+      />
+      <input name="artist_button" type="submit" value="Submit" />
+    </form>
+
+    <script>
+      var input = document.getElementById("input_artists");
+      if (input) {
+        input.addEventListener("keyup", function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("artist_button").click();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
