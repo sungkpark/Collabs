@@ -1,5 +1,4 @@
 var request = require('request');
-var querystring = require('querystring');
 
 var client_id = 'd307b17ff40b454d9a7e54ddb70a180b'; // Your client id
 var client_secret = '2e08498d4777431d92c685bb9c3cf7f3'; // Your secret

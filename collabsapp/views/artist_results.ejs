@@ -5,18 +5,27 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-      <h1><%= searched_name %> </h1>
-      <ul>
-          <% for( let i = 0; i < artists.length; i++ ) { %>
-            <li>
-                <div>
-                    <%= artists[i] %> 
-                </div>
-            </li>
-          <% } %>
-      </ul>
-      <form action="/artist_results" method="POST">
-        <input name="back" type="submit" value="Back" />
-      </form>
+    <h1>Searched for: <%= searched_name %></h1>
+    <h4><%= artists %></h4>
+    <ul>
+      <% for( let i = 0; i < tracks.length; i++ ) { %>
+      <li>
+        <div>
+          <span>
+            <img
+              src="<%= JSON.parse(tracks[i]).img_url %> "
+              alt=""
+              width="48px"
+              height="27px"
+            />
+          </span>
+          <%= JSON.parse(tracks[i]).title %>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+    <form action="/artist_results" method="POST">
+      <input name="back" type="submit" value="Back" />
+    </form>
   </body>
 </html>

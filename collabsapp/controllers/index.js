@@ -59,7 +59,9 @@ exports.get_artists = function (req, res, next) {
                         result.push(element.name);
                     });
                 }
-                // console.log("Artists:", result);
+                
+                if (result.length != 0) result = result[0];
+
                 let query = querystring.stringify({
                     "searched_name": aritst_name,
                     "artists": result
