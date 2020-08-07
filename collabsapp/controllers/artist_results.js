@@ -3,6 +3,8 @@ var querystring = require('querystring');
 
 var API_KEY = "AIzaSyAHEZF1Bf1i8fnEMND-1tZSCSccwQihVhc";
 
+var artist_results = [];
+
 var q_artists = function (artists) {
     var result = "";
     for (let i = 0; i < artists.length; i++) {
@@ -13,8 +15,8 @@ var q_artists = function (artists) {
 
 exports.show_artist = function (req, res, next) {
     var searched_name = req.query.searched_name[0].toUpperCase() + req.query.searched_name.substring(1);
-    var artist_results = [req.query.artists];
-
+    artist_results.push(req.query.artists);
+    
     let query = querystring.stringify({
         "part": "snippet",
         "maxResults": 10,
@@ -40,6 +42,8 @@ exports.show_artist = function (req, res, next) {
             res.render('artist_results',
                 {
                     title: 'Collabs',
+                    app_explanation: 'Collabs is a website to find tracks where your favourite artists collaborate them artists.',
+                    explanation: 'Type in any artists you like to check all their collaborated tracks.',
                     searched_name: searched_name,
                     artists: artist_results,
                     tracks: tracks
@@ -49,5 +53,6 @@ exports.show_artist = function (req, res, next) {
 }
 
 exports.get_index = function (req, res, next) {
+    artist_results = [];
     res.redirect('/');
 }

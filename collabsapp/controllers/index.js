@@ -34,42 +34,44 @@ exports.get_artists = function (req, res, next) {
 
     var result = [];
 
-    // get_artist();
+    if (aritst_name == "") {
+        console.log("Please enter a name of an artist.");
+    } else {
+        request.post(authOptions, function (error, response, body) {
+            if (!error && response.statusCode === 200) {
 
-    request.post(authOptions, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
+                // use the access token to access the Spotify Web API
+                var token = body.access_token;
+                var options = {
+                    url: artist_url,
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    json: true
+                };
+                request.get(options, function (error, response, body) {
+                    // console.log(body.tracks.items[0].name);
+                    if (artist_or_track == "artist") {
+                        body.artists.items.forEach(element => {
+                            result.push(element.name);
+                        });
+                    } else {
+                        body.tracks.items.forEach(element => {
+                            result.push(element.name);
+                        });
+                    }
 
-            // use the access token to access the Spotify Web API
-            var token = body.access_token;
-            var options = {
-                url: artist_url,
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                },
-                json: true
-            };
-            request.get(options, function (error, response, body) {
-                // console.log(body.tracks.items[0].name);
-                if (artist_or_track == "artist") {
-                    body.artists.items.forEach(element => {
-                        result.push(element.name);
+                    if (result.length != 0) result = result[0];
+
+                    let query = querystring.stringify({
+                        "searched_name": aritst_name,
+                        "artists": result
                     });
-                } else {
-                    body.tracks.items.forEach(element => {
-                        result.push(element.name);
-                    });
-                }
-                
-                if (result.length != 0) result = result[0];
-
-                let query = querystring.stringify({
-                    "searched_name": aritst_name,
-                    "artists": result
+                    res.redirect('/artist_results/?' + query);
                 });
-                res.redirect('/artist_results/?' + query);
-            });
-        } else {
-            res.redirect('/error');
-        }
-    });
+            } else {
+                res.redirect('/error');
+            }
+        });
+    }
 }

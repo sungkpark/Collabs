@@ -5,8 +5,30 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1>Searched for: <%= searched_name %></h1>
-    <h4><%= artists %></h4>
+    <h1><%= title %></h1>
+    <h2>Welcome to <%= title %></h2>
+    <h4><%= app_explanation %></h4>
+    <p><%= explanation %></p>
+    <form action="/" method="POST">
+      <div class="multi-select-input">
+        <input
+          type="text"
+          name="input_artists"
+          placeholder="Write in the artists"
+          multiple
+        />
+        <input name="artist_button" type="submit" value="Search" />
+      </div>
+    </form>
+    <h4>Searched for: <%= searched_name %></h4>
+    <div>
+      <% for (let i = 0; i < artists.length; i++) { %>
+          <div class="multi-artist-list">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+            <%= artists[i] %> 
+          </div>
+      <% } %>
+    </div>
     <ul>
       <% for( let i = 0; i < tracks.length; i++ ) { %>
       <li>
