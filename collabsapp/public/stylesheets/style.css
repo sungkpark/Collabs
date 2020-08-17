@@ -8,3 +8,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+#artist_name {
+  cursor: pointer;
+  float: left;
+}
+
+#artist_name:hover {
+  background-color: darkgoldenrod;
+  color: rgb(153, 0, 0);
+}

@@ -13,10 +13,14 @@
       <input
         type="text"
         name="input_artists"
+        id="input_name"
         placeholder="Write in the artists"
+        list="artists_query"
+        oninput="update_recommended()"
         multiple
       />
-      <input name="artist_button" type="submit" value="Submit" />
+      <datalist id="artists_query"> </datalist>
+      <input name="artist_button" type="submit" value="Search" />
     </form>
 
     <script>
@@ -29,6 +33,24 @@
           }
         });
       }
+
+      function update_recommended() {
+        var artist_query = document.getElementById("artists_query");
+        while (artist_query.hasChildNodes()) {
+          artist_query.removeChild(artist_query.lastChild);
+        }
+
+        var query = document.getElementById("input_name").value;
+        get_artist(query, function (artists) {
+          for (let i = 0; i < artists.length; i++) {
+            var node = document.createElement("OPTION");
+            var textnode = document.createTextNode(artists[i]);
+            node.appendChild(textnode);
+            artist_query.appendChild(node);
+          }
+        });
+      }
     </script>
+    <script src="javascripts/bundle.js"></script>
   </body>
 </html>

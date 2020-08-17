@@ -5,30 +5,41 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <h2>Welcome to <%= title %></h2>
-    <h4><%= app_explanation %></h4>
-    <p><%= explanation %></p>
+    <h1>Collabs</h1>
+    <h2>Welcome to Collabs</h2>
+    <h4>
+      Collabs is a website to find tracks where your favourite artists
+      collaborate them artists.
+    </h4>
+    <p>Type in any artists you like to check all their collaborated tracks.</p>
+
     <form action="/" method="POST">
-      <div class="multi-select-input">
-        <input
-          type="text"
-          name="input_artists"
-          placeholder="Write in the artists"
-          multiple
-        />
-        <input name="artist_button" type="submit" value="Search" />
-      </div>
+      <input
+        type="text"
+        name="input_artists"
+        id="input_name"
+        placeholder="Write in the artists"
+        list="artists_query"
+        oninput="update_recommended()"
+        multiple
+      />
+      <datalist id="artists_query"> </datalist>
+      <input name="artist_button" type="submit" value="Search" />
     </form>
     <h4>Searched for: <%= searched_name %></h4>
-    <div>
+
+    <div id="artist-list" style="display: table;">
+      <p>Click on an artist to remove them from the your search.</p>
       <% for (let i = 0; i < artists.length; i++) { %>
-          <div class="multi-artist-list">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-            <%= artists[i] %> 
-          </div>
+      <form action="/" method="POST">
+        <input name="removed_artist" id="artist_name" type="submit" value="<%= artists[i] %>" />
+      </form>
       <% } %>
     </div>
+
+    <% if (tracks.length==0) { %>
+    <h3>There are no collabs between these artists.</h3>
+    <% } else { %>
     <ul>
       <% for( let i = 0; i < tracks.length; i++ ) { %>
       <li>
@@ -46,8 +57,37 @@
       </li>
       <% } %>
     </ul>
+    <% } %>
     <form action="/artist_results" method="POST">
-      <input name="back" type="submit" value="Back" />
+      <input name="back" type="submit" value="Reset" />
     </form>
+    <script>
+      // function remove_artist() {
+      //   var artists_div = document.getElementById("artist-list");
+      //   var artists = [];
+      //   for (let i = 0; i < artists_div.childElementCount; i++) {
+      //     artists.push(artists_div.childNodes[i]);
+      //   }
+      //   console.log("Remaining artists are: ", artists);
+      // }
+
+      function update_recommended() {
+        var artist_query = document.getElementById("artists_query");
+        while (artist_query.hasChildNodes()) {
+          artist_query.removeChild(artist_query.lastChild);
+        }
+
+        var query = document.getElementById("input_name").value;
+        get_artist(query, function (artists) {
+          for (let i = 0; i < artists.length; i++) {
+            var node = document.createElement("OPTION");
+            var textnode = document.createTextNode(artists[i]);
+            node.appendChild(textnode);
+            artist_query.appendChild(node);
+          }
+        });
+      }
+    </script>
+    <script src="../javascripts/bundle.js"></script>
   </body>
 </html>

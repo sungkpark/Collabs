@@ -3,9 +3,11 @@
 var request = require('request');
 var querystring = require('querystring');
 
-var API_KEY = "AIzaSyAHEZF1Bf1i8fnEMND-1tZSCSccwQihVhc";
+var API_KEY = "AIzaSyAHEZF1Bf1i8fnEMND-1tZSCSccwQihVhc"; // mine. #1
+// var API_KEY = "AIzaSyA_yZnjk7V9YbmcLTuIHYlDG97MnVPV0ME"; //misuk e nuna ggu
+// var API_KEY = "AIzaSyCztQZhFdkN7jKfkBMK4MXbbSlVKyT30Ro";
 
-var artists = ["drake", "future", "lil wayne"];
+var artists = ["drake"];
 
 var q_artists = function(artists) {
     var result = "";
@@ -31,6 +33,9 @@ request.get(request_url, function(error, response, body) {
             console.log(element.snippet.title);
         });
         // console.log(JSON.parse(body).items[0].snippet.title);
+    } else {
+        console.error(JSON.parse(body).error.message);
+        console.log(body);
     }
 })
 
