@@ -1,5 +1,5 @@
-var API_KEY = "AIzaSyAHEZF1Bf1i8fnEMND-1tZSCSccwQihVhc";
-var CLIENT_ID = "913028800386-0v4li55a68f25s0cls5r3jpu0f3l72g0.apps.googleusercontent.com";
+var API_KEY = "";
+var CLIENT_ID = "";
 
 function authenticate() {
     return gapi.auth2.getAuthInstance()

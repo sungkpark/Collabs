@@ -3,8 +3,8 @@ var request = require('request');
 // import request from '/request';
 // import Buffer from '/buffer';
 
-var client_id = 'd307b17ff40b454d9a7e54ddb70a180b'; // Your client id
-var client_secret = '2e08498d4777431d92c685bb9c3cf7f3'; // Your secret
+var client_id = ''; // Your client id
+var client_secret = ''; // Your secret
 
 // module.exports = function get_artist(name) {
 window.get_artist = function(name, callback) {

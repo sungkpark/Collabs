@@ -1,9 +1,7 @@
 var request = require('request');
 var querystring = require('querystring');
 
-var API_KEY = "AIzaSyAHEZF1Bf1i8fnEMND-1tZSCSccwQihVhc"; // mine. Number 1
-// var API_KEY = "AIzaSyA_yZnjk7V9YbmcLTuIHYlDG97MnVPV0ME"; //misuk e nuna ggu
-// var API_KEY = "AIzaSyCztQZhFdkN7jKfkBMK4MXbbSlVKyT30Ro"; // mine. num 2
+var API_KEY = ""; // mine. Number 1
 
 var artist_results = [];
 
