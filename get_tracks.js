@@ -3,7 +3,6 @@ var request = require('request');
 var client_id = ''; // Your client id
 var client_secret = ''; // Your secret
 
-
 function get_artist(query, callback) {
 
     var aritst_name = query;
